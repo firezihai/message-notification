@@ -1,0 +1,46 @@
+{
+	"name" : "firezihai/message-notification",
+	"type" : "library",
+	"license" : "MIT",
+	"keywords" : [
+		"php",
+		"hyperf"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"MessageNotification\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"HyperfTest\\" : "tests"
+		}
+	},
+	"require" : {
+		"php" : ">=7.4"
+	},
+	"require-dev" : {
+		"friendsofphp/php-cs-fixer" : "^3.0",
+		"hyperf/guzzle": "^1.1|^2.1|^3.0",
+		"phpunit/phpunit" : ">=7.0"
+	},
+	"suggest" : {
+		"swow/swow" : "Required to create swow components."
+	},
+	"minimum-stability" : "dev",
+	"prefer-stable" : true,
+	"config" : {
+		"optimize-autoloader" : true,
+		"sort-packages" : true
+	},
+	"scripts" : {
+		"test" : "phpunit -c phpunit.xml --colors=always",
+		"analyse" : "phpstan analyse --memory-limit 1024M -l 0 ./src",
+		"cs-fix" : "php-cs-fixer fix $1"
+	},
+	"extra" : {
+		"hyperf" : {
+			"config" : "MessageNotification\\ConfigProvider"
+		}
+	}
+}
