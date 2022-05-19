@@ -29,6 +29,10 @@ class MessageManager
         $this->logger = $logger;
     }
 
+    /**
+     * 获取消息驱动.
+     * @param mixed $name
+     */
     public function getDriver($name = 'default'): PlatformInterface
     {
         if (isset($this->drivers[$name]) && $this->drivers[$name] instanceof PlatformInterface) {

@@ -6,6 +6,9 @@ namespace MessageNotification\Store;
 
 use Hyperf\Contract\StdoutLoggerInterface;
 
+/**
+ * token储存驱动管理类.
+ */
 class StoreManager
 {
     protected $drivers = [];

@@ -1,5 +1,6 @@
 {
 	"name" : "firezihai/message-notification",
+	"description": "消息通知SDK,集成钉钉、微信等平台消息通知功能",
 	"type" : "library",
 	"license" : "MIT",
 	"keywords" : [

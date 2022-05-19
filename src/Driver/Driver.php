@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace MessageNotification\Driver;
 
 use Hyperf\Guzzle\ClientFactory;
+use MessageNotification\Store\StoreInterface;
 use Psr\Container\ContainerInterface;
 
+/**
+ * 平台驱动类.
+ */
 abstract class Driver implements PlatformInterface
 {
     /**
@@ -34,5 +38,14 @@ abstract class Driver implements PlatformInterface
         $clientFactory = make(ClientFactory::class);
 
         return $clientFactory->create(['verify' => false]);
+    }
+
+    public function getStore()
+    {
+        return make(StoreInterface::class, ['config' => [
+            'appkey' => $this->config['app']['appkey'],
+            'appsecret' => $this->config['app']['appsecret'],
+            'driver' => $this->config['store']['driver'],
+        ]]);
     }
 }

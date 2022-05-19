@@ -7,7 +7,7 @@ namespace MessageNotification\Store;
 abstract class Driver implements StoreInterface
 {
     /**
-     * message notification config app 
+     * message notification config app.
      * @var array
      */
     protected $config;

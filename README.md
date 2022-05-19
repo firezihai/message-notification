@@ -22,8 +22,8 @@ composer require firezihai/message-notification -vvv
 发布配置文件 config/autload/message_notification.php
 
 ```
+php bin/hyperf.php vendor:publish firezihai/message-notification
 
-hyperf vendor:publish firezihai/message-notification
 ```
 
 ## 使用
@@ -64,6 +64,18 @@ message->send(['xxxxx']);
             'agent_id' => '',
         ],
     ],
+    'dingTalkRobot' => [
+        'driver' => MessageNotification\Driver\DingTalkRobot::class,
+        'store' => [
+            'access_token' => '',
+        ],
+        'app' => [
+            'app_name' => '系统通知',
+            //如需加签配置此参数
+            'appsecret' => '',
+        ],
+    ],
+
 ```
 
 2. 使用

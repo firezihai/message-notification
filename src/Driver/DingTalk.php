@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace MessageNotification\Driver;
 
-use MessageNotification\Store\Store;
-
+/**
+ * 钉钉应用消息通知.
+ */
 class DingTalk extends Driver
 {
     private $api = 'https://oapi.dingtalk.com/';
@@ -58,16 +59,11 @@ class DingTalk extends Driver
         if (! is_array($this->config['store'])) {
             throw new \InvalidArgumentException('The message notification config store must be an array ');
         }
-        if (! isset($this->config['store']['type']) && empty($this->config['store']['type'])) {
-            throw new \InvalidArgumentException('The message notification config store.type is invalid ');
+        if (! isset($this->config['store']['driver']) && empty($this->config['store']['driver'])) {
+            throw new \InvalidArgumentException('The message notification config store.driver is invalid ');
         }
 
-        $store = make(Store::class, ['config' => [
-            'appkey' => $this->config['app']['appkey'],
-            'appsecret' => $this->config['app']['appsecret'],
-            'type' => $this->config['store']['type'],
-        ]]);
-
+        $store = $this->getStore();
         $token = $store->get();
 
         if (empty($token) || empty($token['access_token']) || time() - $token['last_update_time'] > $token['expires_in']) {

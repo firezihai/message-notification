@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MessageNotification;
 
+/**
+ * 消息类.
+ */
 class Message
 {
     protected $driver;

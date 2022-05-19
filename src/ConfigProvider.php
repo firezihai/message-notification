@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MessageNotification;
 
+use MessageNotification\Store\Store;
+use MessageNotification\Store\StoreInterface;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -11,6 +14,7 @@ class ConfigProvider
         return [
             'dependencies' => [
                 MessageInterface::class => Message::class,
+                StoreInterface::class => Store::class,
             ],
             'commands' => [
             ],

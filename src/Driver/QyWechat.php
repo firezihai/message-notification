@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace MessageNotification\Driver;
 
-use MessageNotification\Store\Store;
-
+/**
+ * 企业微信应用消息.
+ */
 class QyWechat extends Driver
 {
     private $api = 'https://qyapi.weixin.qq.com/cgi-bin/';
@@ -51,17 +52,13 @@ class QyWechat extends Driver
     public function getAccessToken()
     {
         if (! is_array($this->config['store'])) {
-            throw new \InvalidArgumentException('The store must be an array ');
+            throw new \InvalidArgumentException('The message notification config store must be an array ');
         }
-        if (! isset($this->config['store']['type']) && empty($this->config['store']['type'])) {
-            throw new \InvalidArgumentException('The store is missing a type configuration item ');
+        if (! isset($this->config['store']['driver']) && empty($this->config['store']['driver'])) {
+            throw new \InvalidArgumentException('The message notification config store.driver is invalid ');
         }
 
-        $store = make(Store::class, ['config' => [
-            'appkey' => $this->config['app']['appkey'],
-            'appsecret' => $this->config['app']['appsecret'],
-            'type' => $this->config['store']['type'],
-        ]]);
+        $store = $this->getStore();
 
         $token = $store->get();
 

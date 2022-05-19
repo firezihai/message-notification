@@ -15,7 +15,7 @@ class Cache implements StoreInterface
     protected $container;
 
     /**
-     * message notification config app 
+     * message notification config app.
      * @var array
      */
     protected $config;
@@ -50,6 +50,8 @@ class Cache implements StoreInterface
      */
     protected function getCacheTokenKey()
     {
-        return md5($this->config['appkey'] . 'access_token');
+        $key = $this->config['appkey'];
+        $key .= $this->config['agent_id'] ?? '';
+        return md5($key . 'access_token');
     }
 }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MessageNotification;
 
+/**
+ * 消息接口.
+ */
 interface MessageInterface
 {
     /**
