@@ -149,25 +149,14 @@ class FeiShu implements PlatformInterface
 
 Db implements StoreInterface
 {
-
-
-    /**
-    * 构造方法会自动注入 message_notification 文件中的app配置项
-     * @var array
-     */
-    protected $config;
-
-    public function __construct(array $config)
-    {
-        $this->config = $config;
-    }
-
-    public function set(array $token)
+	
+	// $app 配置文件中的app配置项
+    public function set(array $app,array $token)
     {
 
     }
 
-    public function get()
+    public function get(array $app,array $token)
     {
 
     }
