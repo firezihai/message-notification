@@ -9,7 +9,7 @@ namespace MessageNotification\Store;
  */
 interface StoreInterface
 {
-    public function set(array $token);
+    public function set(array $app,array $token);
 
-    public function get();
+    public function get(array $app);
 }

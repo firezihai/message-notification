@@ -20,38 +20,38 @@ class Cache implements StoreInterface
      */
     protected $config;
 
-    public function __construct(ContainerInterface $container, array $config)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->config = $config;
     }
 
-    public function set(array $token)
+    public function set(array $app, array $token)
     {
         if (empty($token)) {
             throw new \InvalidArgumentException('token is empty');
         }
-        $token['last_update_time'] = time();
+        $token['token_update_time'] = time();
 
         $cache = $this->container->get(CacheInterface::class);
-        $cache->set($this->getCacheTokenKey(), $token);
+        $cache->set($this->getCacheTokenKey($app), $token);
     }
 
-    public function get()
+    public function get(array $app)
     {
         $cache = $this->container->get(CacheInterface::class);
 
-        return $cache->get($this->getCacheTokenKey());
+        return $cache->get($this->getCacheTokenKey($app));
     }
 
     /**
      * Get the cache key of token.
+     * @param mixed $app
      * @return string
      */
-    protected function getCacheTokenKey()
+    protected function getCacheTokenKey($app)
     {
-        $key = $this->config['appkey'];
-        $key .= $this->config['agent_id'] ?? '';
+        $key = $app['appkey'];
+        $key .= $app['agent_id'] ?? '';
         return md5($key . 'access_token');
     }
 }

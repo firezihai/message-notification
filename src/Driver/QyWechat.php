@@ -60,9 +60,9 @@ class QyWechat extends Driver
 
         $store = $this->getStore();
 
-        $token = $store->get();
+        $token = $store->get($this->config['app']);
 
-        if (empty($token) || empty($token['access_token']) || time() - $token['last_update_time'] > $token['expires_in']) {
+        if (empty($token) || empty($token['access_token']) || time() - $token['token_update_time'] > $token['expires_in']) {
             $client = $this->getClient();
             $url = $this->api . 'user/gettoken';
             $response = $client->get($this->api . 'gettoken', ['query' => [
@@ -73,7 +73,7 @@ class QyWechat extends Driver
             if (! isset($response['errcode']) || $response['errcode'] != 0) {
                 throw new \InvalidArgumentException('You get error : ' . json_encode($response, JSON_UNESCAPED_UNICODE));
             }
-            $store->set([
+            $store->set($this->config['app'], [
                 'access_token' => $response['access_token'],
                 'expires_in' => $response['expires_in'],
             ]);

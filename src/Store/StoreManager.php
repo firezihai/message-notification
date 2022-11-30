@@ -29,7 +29,7 @@ class StoreManager
         if (isset($this->drivers[$driverClass]) && $this->drivers[$driverClass] instanceof StoreInterface) {
             return $this->drivers[$driverClass];
         }
-        $driver = make($driverClass, ['config' => $config]);
+        $driver = make($driverClass);
         return $this->drivers[$driverClass] = $driver;
     }
 }
