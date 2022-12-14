@@ -153,12 +153,21 @@ Db implements StoreInterface
 	// $app 配置文件中的app配置项
     public function set(array $app,array $token)
     {
-
+		....
+		$update['access_token'] = $token['access_token'];
+		$update['expires_in'] = $token['expires_in'];
+		....
     }
 
-    public function get(array $app,array $token)
+    public function get(array $app)
     {
-
+	  ....
+	  
+	  return [
+		   'access_token' => $token['access_token'],
+           'expires_in' => $token['expires_in'],
+		   'token_update_time'=>$token['token_update_time'],
+	  ]
     }
 }
 
